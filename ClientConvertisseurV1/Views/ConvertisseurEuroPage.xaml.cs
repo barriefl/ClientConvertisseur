@@ -9,6 +9,8 @@ using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -24,9 +26,13 @@ namespace ClientConvertisseurV1.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ConvertisseurEuroPage : Page
+    public sealed partial class ConvertisseurEuroPage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private ObservableCollection<Devise> devises;
+        private double montant;
+        private double resultat;
 
         public ObservableCollection<Devise> Devises
         {
@@ -38,6 +44,35 @@ namespace ClientConvertisseurV1.Views
             set
             {
                 this.devises = value;
+                OnPropertyChanged("Devises");
+            }
+        }
+
+        public double Montant
+        {
+            get
+            {
+                return montant;
+            }
+
+            set
+            {
+                montant = value;
+                OnPropertyChanged("Montant");
+            }
+        }
+
+        public double Resultat
+        {
+            get
+            {
+                return this.resultat;
+            }
+
+            set
+            {
+                this.resultat = value;
+                OnPropertyChanged("Resultat");
             }
         }
 
@@ -54,12 +89,47 @@ namespace ClientConvertisseurV1.Views
             List<Devise> result = await service.GetDevisesAsync("devises");
             if (result == null)
             {
-                //MessageAsync("API non disponible !", "Erreur");
+                MessageAsync("API non disponible !", "Erreur");
             }
             else 
             {
                 Devises = new ObservableCollection<Devise>(result);
             }
+        }
+
+        private async void MessageAsync(string content, string title)
+        {
+            ContentDialog errorMessage = new ContentDialog
+            {
+                Title = title,
+                Content = content,
+                CloseButtonText = "OK"
+            };
+
+            errorMessage.XamlRoot = this.Content.XamlRoot;
+            ContentDialogResult result = await errorMessage.ShowAsync();
+        }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private void ButtonConvertir_Click(object sender, RoutedEventArgs e)
+        {
+            Devise devise = (Devise)ComboBoxDevises.SelectedItem;
+            if (devise == null)
+            {
+                MessageAsync("Vous devez sélectionner une devise !", "Erreur");
+            }
+            else 
+            {
+                this.Resultat = this.Montant * devise.Taux;
+            }         
         }
     }
 }
