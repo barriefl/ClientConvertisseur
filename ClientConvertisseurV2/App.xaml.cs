@@ -1,4 +1,5 @@
 ﻿using ClientConvertisseurV2.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -16,6 +17,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using ClientConvertisseurV2.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,13 +30,34 @@ namespace ClientConvertisseurV2
     public partial class App : Application
     {
         /// <summary>
+        /// Gets the instance to resolve application services.
+        /// </summary>
+        public ServiceProvider Services { get; }
+
+
+        /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
             this.InitializeComponent();
+
+            /// <summary>
+            /// Configures the services for the application.
+            /// </summary>
+            ServiceCollection services = new ServiceCollection();
+
+            // ViewModels
+            services.AddTransient<ConvertisseurEuroViewModel>();
+
+            Services = services.BuildServiceProvider();
         }
+
+        /// <summary>
+        /// Gets the current app instance in use.
+        /// </summary>
+        public new static App Current => (App)Application.Current;
 
         /// <summary>
         /// Invoked when the application is launched.

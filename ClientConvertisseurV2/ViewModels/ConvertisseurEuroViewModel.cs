@@ -15,6 +15,7 @@ namespace ClientConvertisseurV2.ViewModels
     {
         private ObservableCollection<Devise> devises;
         private double montant;
+        private Devise deviseSelectionnee;
         private double resultat;
 
         public ObservableCollection<Devise> Devises
@@ -41,6 +42,20 @@ namespace ClientConvertisseurV2.ViewModels
             set
             {
                 montant = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Devise DeviseSelectionnee
+        {
+            get
+            {
+                return this.deviseSelectionnee;
+            }
+
+            set
+            {
+                this.deviseSelectionnee = value;
                 OnPropertyChanged();
             }
         }
@@ -97,14 +112,13 @@ namespace ClientConvertisseurV2.ViewModels
 
         private void ActionSetConversion()
         {
-            Devise devise = (Devise)ComboBoxDevises.SelectedItem;
-            if (devise == null)
+            if (this.DeviseSelectionnee == null)
             {
                 MessageAsync("Vous devez sélectionner une devise !", "Erreur");
             }
             else
             {
-                this.Resultat = this.Montant * devise.Taux;
+                this.Resultat = this.Montant * this.DeviseSelectionnee.Taux;
             }
         }
     }

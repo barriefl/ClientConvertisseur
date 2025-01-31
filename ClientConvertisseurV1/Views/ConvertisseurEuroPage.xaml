@@ -20,7 +20,7 @@
         <TextBlock Name="TextBlockDevise" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBoxMontantEuro" Text="Devise" Margin="10">
 
         </TextBlock>
-        <ComboBox Name="ComboBoxDevises" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBlockDevise" Margin="10" Width="200" ItemsSource="{Binding Devises, Mode=TwoWay}" DisplayMemberPath="NomDevise">
+        <ComboBox Name="ComboBoxDevises" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBlockDevise" Margin="10" Width="200" ItemsSource="{Binding Devises}" SelectedItem="{Binding DeviseSelectionnee, Mode=TwoWay}" DisplayMemberPath="NomDevise">
 
         </ComboBox>
         <Button Name="ButtonConvertir" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="ComboBoxDevises" Content="Convertir" Margin="10" Width="200" Click="ButtonConvertir_Click">
