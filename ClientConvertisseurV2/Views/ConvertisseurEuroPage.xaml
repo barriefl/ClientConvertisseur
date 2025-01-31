@@ -9,7 +9,29 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <RelativePanel VerticalAlignment="Center">
+        <TextBlock Name="TextBlockMontantEuro" RelativePanel.AlignHorizontalCenterWithPanel="True" Text="Montant en euros">
 
-    </Grid>
+        </TextBlock>
+        <TextBox Name="TextBoxMontantEuro" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBlockMontantEuro" Margin="10" Width="200" Text="{Binding Montant, Mode=TwoWay}">
+
+        </TextBox>
+
+        <TextBlock Name="TextBlockDevise" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBoxMontantEuro" Text="Devise" Margin="10">
+
+        </TextBlock>
+        <ComboBox Name="ComboBoxDevises" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBlockDevise" Margin="10" Width="200" ItemsSource="{Binding Devises, Mode=TwoWay}" DisplayMemberPath="NomDevise">
+
+        </ComboBox>
+        <Button Name="ButtonConvertir" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="ComboBoxDevises" Content="Convertir" Margin="10" Width="200" Command="{Binding ButtonSetConversion}">
+
+        </Button>
+
+        <TextBlock Name="TextBlockMontantDevise" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="ButtonConvertir" Text="Montant en devise" Margin="10">
+
+        </TextBlock>
+        <TextBox Name="TextBoxMontantDevise" IsReadOnly="True" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TextBlockMontantDevise" Width="200" Text="{Binding Resultat}">
+
+        </TextBox>
+    </RelativePanel>
 </Page>

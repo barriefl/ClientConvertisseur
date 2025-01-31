@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
-namespace WSConvertisseur.Models
+namespace ClientConvertisseurV1.Models
 {
     public class Devise
     {
