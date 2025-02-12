@@ -15,7 +15,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Views\ConvertisseurDevisePage.xaml" />
     <None Remove="Views\ConvertisseurEuroPage.xaml" />
   </ItemGroup>
 
@@ -44,11 +43,6 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\ConvertisseurDevisePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\ConvertisseurEuroPage.xaml">
