@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using ClientConvertisseurV2.Models;
 using Microsoft.UI.Xaml.Controls;
 using CommunityToolkit.Mvvm.Input;
+using ClientConvertisseurV2.Services;
 
 namespace ClientConvertisseurV2.ViewModels
 {

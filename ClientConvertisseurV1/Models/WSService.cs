@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using WSConvertisseur.Models;
+using ClientConvertisseurV1.Models;
 
 namespace ClientConvertisseurV1.Models
 {

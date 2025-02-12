@@ -1,5 +1,4 @@
-﻿using ClientConvertisseurV2.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,14 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using ClientConvertisseurV2.Models;
 
-namespace ClientConvertisseurV2.Models
+namespace ClientConvertisseurV2.Services
 {
     public class WSService : IService
     {
         private HttpClient client = new HttpClient();
 
-        public WSService(string url) 
+        public WSService(string url)
         {
             client.BaseAddress = new Uri(url);
             client.DefaultRequestHeaders.Accept.Clear();
