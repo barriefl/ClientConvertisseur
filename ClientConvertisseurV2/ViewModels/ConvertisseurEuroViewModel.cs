@@ -83,7 +83,7 @@ namespace ClientConvertisseurV2.ViewModels
             ButtonSetConversion = new RelayCommand(ActionSetConversion);
         }
 
-        private async void GetDataOnLoadAsync()
+        public async void GetDataOnLoadAsync()
         {
             WSService service = new WSService("https://localhost:7057/api/");
             List<Devise> result = await service.GetDevisesAsync("devises");
@@ -110,7 +110,7 @@ namespace ClientConvertisseurV2.ViewModels
             ContentDialogResult result = await errorMessage.ShowAsync();
         }
 
-        private void ActionSetConversion()
+        public void ActionSetConversion()
         {
             if (this.DeviseSelectionnee == null)
             {
